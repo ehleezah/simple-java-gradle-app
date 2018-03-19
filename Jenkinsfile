@@ -11,20 +11,5 @@ pipeline {
                 sh 'gradle clean build' 
             }
         }
-		stage('Test') {
-            steps {
-                sh 'gradle clean test'
-            }
-            post {
-                always {
-                  step $class: 'JUnitResultArchiver', allowEmptyResults: true, testResults: '**/build/test-results/TEST-*.xml'
-                }
-            }
-        }
- 		stage('Deliver') { 
-            steps {
-                sh './deliver.sh' 
-            }
-        }
     }
 }
